@@ -23,7 +23,7 @@ public class MainPresenter extends MainContract.MainPresenter {
     if (focus == null)
       return NewsType.typeArray;
     else {
-      if (focus.size()==0) return null;
+      if (focus.size()==0) return new NewsType.NewsTypeModel[0];
       else {
         List<NewsType.NewsTypeModel> retList=new ArrayList();
         for (NewsType.NewsTypeModel newsTypeModel : NewsType.typeArray) {

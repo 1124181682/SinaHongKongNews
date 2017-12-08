@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import butterknife.BindView;
-import yk.sinahknews.ui.other.AboutActivity;
-import yk.sinahknews.ui.managefocus.ManageFocusActivity;
 import yk.sinahknews.R;
+import yk.sinahknews.ui.other.SettingsActivity;
 import yk.sinahknews.ui.base.BaseMVPActivity;
+import yk.sinahknews.ui.managefocus.ManageFocusActivity;
+import yk.sinahknews.ui.other.AboutActivity;
+import yk.sinahknews.ui.search360.Search360Activity;
 
 public class MainActivity extends BaseMVPActivity<MainPresenter> implements NavigationView.OnNavigationItemSelectedListener {
   private static MainActivity instance;
@@ -55,6 +57,15 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Navi
   }
 
   @Override
+  public void onBackPressed() {
+    if (drawerLayout.isDrawerOpen(Gravity.START)){
+      drawerLayout.closeDrawer(Gravity.START);
+    }else {
+      super.onBackPressed();
+    }
+  }
+
+  @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     switch (item.getItemId()){
       case R.id.nav_manage:
@@ -62,10 +73,24 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Navi
         break;
       case R.id.nav_about:
         startActivity(AboutActivity.class);
+        break;
+      case R.id.nav_search360:
+        startActivity(Search360Activity.class);
+        break;
+      case R.id.nav_setting:
+        startActivity(SettingsActivity.class);
+        break;
     }
     return true;
   }
   public static void reloadActivity(){
     instance.reload();
+    instance=null;
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    instance=null;
   }
 }

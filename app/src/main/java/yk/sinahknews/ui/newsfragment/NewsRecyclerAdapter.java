@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import yk.sinahknews.R;
+import yk.sinahknews.app.GlideApp;
 
 /**
  * Created by YK on 2017/11/14.
@@ -38,7 +39,9 @@ public class NewsRecyclerAdapter extends BaseQuickAdapter<NewsItem, BaseViewHold
     }
     if (imgs != null && imgs.length != 0) {
       for (int i = 0; i<3&&i< imgs.length; i++) {
-        Glide.with(helper.itemView).load(imgs[i]).into((ImageView) imgroot.getChildAt(i));
+        GlideApp.with(helper.itemView).load(imgs[i]).
+            placeholder(mContext.getResources().getDrawable(R.drawable.loading))
+            .error(R.drawable.img_load_error).into((ImageView) imgroot.getChildAt(i));
       }
     }
   }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -67,10 +67,38 @@
         android:layout_marginTop="5dp"/>
 
     <TextView
+        android:textIsSelectable="true"
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:textSize="18sp"/>
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/footer">
+
+      <View
+          android:layout_above="@+id/tv_dixian"
+          android:layout_marginBottom="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/gray"/>
+      <TextView
+          android:id="@+id/tv_dixian"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:text="本数据由IDataAPI提供"
+          android:gravity="center"/>
+      <View
+          android:layout_below="@+id/tv_dixian"
+          android:layout_marginBottom="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginTop="10dp"
+          android:background="@color/gray"/>
+    </RelativeLayout>
   </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

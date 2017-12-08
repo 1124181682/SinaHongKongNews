@@ -1,11 +1,14 @@
 package yk.sinahknews.ui.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,6 +32,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     startPresenter();
     bkbind = ButterKnife.bind(this);
     initViews();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    MobclickAgent.onResume(this);
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    MobclickAgent.onPause(this);
   }
 
   protected void startPresenter() {
@@ -64,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     Log.d(TAG, log);
   }
 
-  public void startActivity(Class<? extends AppCompatActivity> cls) {
+  public void startActivity(Class<? extends Activity> cls) {
     startActivity(new Intent(getApplicationContext(), cls));
   }
 

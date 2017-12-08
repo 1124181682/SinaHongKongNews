@@ -4,22 +4,18 @@
       tools:showIn="navigation_view">
 
   <group android:checkableBehavior="single">
-    <!--<item-->
-        <!--android:id="@+id/nav_camera"-->
-        <!--android:icon="@drawable/ic_menu_camera"-->
-        <!--android:title="Import"/>-->
-    <!--<item-->
-        <!--android:id="@+id/nav_gallery"-->
-        <!--android:icon="@drawable/ic_menu_gallery"-->
-        <!--android:title="Gallery"/>-->
-    <!--<item-->
-        <!--android:id="@+id/nav_slideshow"-->
-        <!--android:icon="@drawable/ic_menu_slideshow"-->
-        <!--android:title="Slideshow"/>-->
+    <item
+        android:id="@+id/nav_search360"
+        android:icon="@drawable/ic_search360_black_24dp"
+        android:title="360新闻搜索"/>
     <item
         android:id="@+id/nav_manage"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/ic_favorite_black_24dp"
         android:title="设置关注"/>
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="设置"/>
   </group>
 
   <item android:title="Communicate">
@@ -30,5 +26,4 @@
           android:title="关于此APP"/>
     </menu>
   </item>
-
 </menu>

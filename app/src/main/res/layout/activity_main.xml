@@ -23,6 +23,7 @@
         android:padding="10dp"
         android:src="@drawable/ic_menu_white_24dp"
         android:layout_height="0dp"/>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
         app:layout_constraintLeft_toRightOf="@+id/iv_open_close"
@@ -50,6 +51,5 @@
       android:layout_gravity="start"
       app:headerLayout="@layout/nav_header_main"
       app:menu="@menu/activity_main_drawer">
-
   </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

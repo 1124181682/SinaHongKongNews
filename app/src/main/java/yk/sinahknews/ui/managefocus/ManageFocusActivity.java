@@ -106,7 +106,9 @@ public class ManageFocusActivity extends BaseActivity {
 
     @Override
     public View getView(FlowLayout parent, int position, String o) {
-      ViewGroup root = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.item_flow_tags, null);
+      ViewGroup childAt = (ViewGroup) parent.getChildAt(position);
+      ViewGroup root = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.item_flow_tags,
+          (ViewGroup) parent.getChildAt(position),false);
       TextView textView = (TextView) root.findViewById(R.id.tv_);
       if (defaultTextColor == -1)
         defaultTextColor = textView.getCurrentTextColor();

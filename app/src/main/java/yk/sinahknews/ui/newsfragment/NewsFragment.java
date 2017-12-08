@@ -3,7 +3,9 @@ package yk.sinahknews.ui.newsfragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import yk.sinahknews.R;
 import yk.sinahknews.app.NewsType;
+import yk.sinahknews.util.AnimatorUtil;
 
 /**
  * Created by YK on 2017/11/13.
@@ -32,14 +35,17 @@ public class NewsFragment extends Fragment implements NewsContract.INewsView {
   Unbinder bkBind;
   NewsPresenter newsPresenter;
   NewsRecyclerAdapter newsRecyclerAdapter;
-  Handler handler=new Handler();
-  List<NewsItem> data=new ArrayList<>();
+  Handler handler = new Handler();
+  List<NewsItem> data = new ArrayList<>();
+  @BindView(R.id.fab_)
+  FloatingActionButton mFAB;
+
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Bundle arguments = getArguments();
     newsType = arguments.getParcelable("NewsType");
-    newsPresenter=new NewsPresenter();
+    newsPresenter = new NewsPresenter();
     newsPresenter.setView(this);
     newsPresenter.start();
   }
@@ -53,27 +59,34 @@ public class NewsFragment extends Fragment implements NewsContract.INewsView {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    bkBind = ButterKnife.bind(this,view);
+    bkBind = ButterKnife.bind(this, view);
     //设置recyclerview
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-    newsRecyclerAdapter=new NewsRecyclerAdapter(null);
+    newsRecyclerAdapter = new NewsRecyclerAdapter(null);
     newsRecyclerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
     recyclerView.setAdapter(newsRecyclerAdapter);
     newsPresenter.startGetNews(newsType);
     newsRecyclerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
       @Override
       public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        newsPresenter.onItemClick(getContext(),position);
+        newsPresenter.onItemClick(getContext(), position);
       }
     });
+    mFAB.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        recyclerView.scrollToPosition(0);
+      }
+    });
+    AnimatorUtil.scaleHide(mFAB);
   }
 
   @Override
   public void onDestroyView() {
     super.onDestroyView();
-    if (bkBind!=null) bkBind.unbind();
-    if (newsPresenter!=null) newsPresenter.detachView();
+    if (bkBind != null) bkBind.unbind();
+    if (newsPresenter != null) newsPresenter.detachView();
   }
 
   @Override
@@ -85,7 +98,7 @@ public class NewsFragment extends Fragment implements NewsContract.INewsView {
       public void onLoadMoreRequested() {
         newsPresenter.loadMore();
       }
-    },recyclerView);
+    }, recyclerView);
   }
 
   @Override
@@ -107,10 +120,10 @@ public class NewsFragment extends Fragment implements NewsContract.INewsView {
   public void showMoreContent(List<NewsItem> news, boolean hasNext) {
     newsRecyclerAdapter.loadMoreComplete();
     newsRecyclerAdapter.addData(news);
-    if (hasNext){
-    }else {
+    if (hasNext) {
+    } else {
       newsRecyclerAdapter.setEnableLoadMore(false);
-      newsRecyclerAdapter.setOnLoadMoreListener(null,recyclerView);
+      newsRecyclerAdapter.setOnLoadMoreListener(null, recyclerView);
       newsRecyclerAdapter.loadMoreEnd(true);
     }
   }

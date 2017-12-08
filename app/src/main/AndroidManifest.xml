@@ -4,7 +4,9 @@
 
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
   <application
       android:name=".app.App"
       android:allowBackup="true"
@@ -16,7 +18,7 @@
     <activity
         android:name=".ui.other.WelcomActivity"
         android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.Welcom">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -31,7 +33,7 @@
     <activity
         android:name=".ui.newsdetail.NewsDetailActivity"
         android:label="@string/title_activity_news_detail"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NewsDetail">
     </activity>
     <activity
         android:name=".ui.managefocus.ManageFocusActivity"
@@ -43,6 +45,52 @@
         android:name=".ui.other.AboutActivity"
         android:label="@string/title_activity_about"
         android:theme="@style/AppTheme.NoActionBar">
+    </activity>
+
+    <meta-data
+        android:name="UMENG_APPKEY"
+        android:value="${umeng_app_key}"/>
+    <meta-data
+        android:name="UMENG_CHANNEL"
+        android:value="${umeng_channel}"/>
+
+    <activity
+        android:name=".ui.search360.Search360Activity"
+        android:label="@string/title_activity_search360"
+        android:launchMode="singleTask"
+        android:theme="@style/AppTheme.NoActionBar">
+      <intent-filter android:icon="@mipmap/ic_launcher"
+          android:roundIcon="@mipmap/ic_launcher_round"
+          android:label="搜索一下，发现新鲜事"
+          android:logo="@mipmap/ic_launcher">
+        <action android:name="android.intent.action.WEB_SEARCH"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter android:icon="@mipmap/ic_launcher"
+                     android:roundIcon="@mipmap/ic_launcher_round"
+                     android:label="搜索一下，发现新鲜事"
+                     android:logo="@mipmap/ic_launcher">
+        <action android:name="yk.sinahknews.action.360_SEARCH"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
+
+    <service
+        android:name=".component.SearchNotificationService"
+        android:enabled="true"
+        android:process=":search"
+        android:exported="false">
+    </service>
+
+    <receiver
+        android:name=".component.NotificationCloseClickReceiver"
+        android:enabled="true"
+        android:exported="true">
+    </receiver>
+
+    <activity
+        android:name=".ui.other.SettingsActivity"
+        android:label="@string/title_activity_settings">
     </activity>
   </application>
 

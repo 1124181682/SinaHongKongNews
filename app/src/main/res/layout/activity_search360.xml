@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="yk.sinahknews.ui.search360.Search360Activity">
+
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/appbar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:theme="@style/AppTheme.AppBarOverlay">
+
+      <RelativeLayout
+          android:id="@+id/rl_toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_scrollFlags="scroll|enterAlways">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_action_goback"/>
+
+        <SearchView
+            android:id="@+id/searchview_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/iv_back"
+            android:focusable="false"
+            android:iconifiedByDefault="false"
+            android:queryHint="输入关键词进行搜索">
+        </SearchView>
+      </RelativeLayout>
+
+  </android.support.design.widget.AppBarLayout>
+
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="10dp"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      tools:context="yk.sinahknews.ui.search360.Search360Activity"
+      tools:showIn="@layout/activity_search360">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+  </android.support.constraint.ConstraintLayout>
+
+  <ImageView
+      android:id="@+id/iv_refresh"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      app:srcCompat="@drawable/ic_refresh"
+      android:visibility="invisible"/>
+
+</android.support.design.widget.CoordinatorLayout>
